@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enkripsi & Dekripsi AES</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h2>AES Enkripsi & Dekripsi</h2>
+
+  <label for="input">Input</label>
+  <textarea id="input" rows="4" placeholder="Teks untuk dienkripsi / didekripsi"></textarea>
+
+  <label for="key">Kunci Rahasia</label>
+  <input type="text" id="key" value="halohalohalohalo" placeholder="16/24/32 karakter sesuai AES" />
+
+  <label for="iv">IV (Vektor Inisialisasi)</label>
+  <input type="text" id="iv" value="1001001001001001" placeholder="16 karakter / 12 byte untuk GCM" />
+
+  <label for="keySize">Ukuran Kunci (bit)</label>
+  <select id="keySize">
+    <option value="128" selected>128</option>
+    <option value="192">192</option>
+    <option value="256">256</option>
+  </select>
+
+  <label for="mode">Mode Cipher</label>
+  <select id="mode">
+    <option value="CBC">CBC</option>
+    <option value="CFB">CFB</option>
+    <option value="CTR">CTR</option>
+    <option value="OFB">OFB</option>
+    <option value="ECB">ECB</option>
+    <option value="GCM">GCM</option>
+  </select>
+
+  <div id="paddingContainer">
+    <label for="padding">Padding</label>
+    <select id="padding">
+      <option value="Pkcs7">Pkcs7</option>
+      <option value="Iso97971">Iso97971</option>
+      <option value="AnsiX923">AnsiX923</option>
+      <option value="Iso10126">Iso10126</option>
+      <option value="ZeroPadding">ZeroPadding</option>
+      <option value="NoPadding">NoPadding</option>
+    </select>
+  </div>
+
+  <div id="tagLengthContainer">
+    <label for="tagLength">Tag Length (bit, GCM only)</label>
+    <input type="number" id="tagLength" value="128" min="96" max="128" step="8" />
+  </div>
+
+  <label for="format">Format Output</label>
+  <div class="radio-group">
+    <label><input type="radio" name="format" value="Base64" checked /> Base64</label>
+    <label><input type="radio" name="format" value="Hex" /> Hex</label>
+  </div>
+
+  <label for="output">Output</label>
+  <textarea id="output" rows="4" readonly placeholder="Hasil akan muncul di sini"></textarea>
+
+  <button id="btnEncrypt">Enkripsi</button>
+  <button id="btnDecrypt">Dekripsi</button>
+
+  <!-- Log Waktu Proses -->
+  <div id="logTime" style="margin-top: 20px; font-weight: bold;"></div>
+
+  <div id="logFloating" class="log-box">
+    <ul id="logList"></ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
